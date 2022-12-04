@@ -15,6 +15,7 @@ const MainApp = () => {
             <Route path='Inicio' element={<Inicio/>}></Route>
             <Route path='Busqueda' element={<Busqueda />}></Route>
             <Route path='Nuevo' element={<Nuevo />}></Route>
+            
             <Route path='*' element={<Navigate to='/Inicio' />}></Route>
         </Routes>
         </BrowserRouter>

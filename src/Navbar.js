@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link,NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export const Navbar = () => {
     return (
@@ -15,13 +15,13 @@ export const Navbar = () => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <p>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/Inicio"><b>inicio</b></NavLink>
+                                <NavLink className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }` }  to="/Inicio"><b>inicio</b></NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/busqueda"><b>busqueda</b></NavLink>
+                                <NavLink className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }` }  to="/busqueda"><b>busqueda</b></NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/nuevo"><b>nuevo</b></NavLink>
+                                <NavLink className={ ({ isActive }) => `nav-link ${ isActive ? 'active' : '' }` }  to="/nuevo"><b>nuevo</b></NavLink>
                             </li>
                         </p>
                     </ul>

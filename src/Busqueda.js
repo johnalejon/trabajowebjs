@@ -1,134 +1,111 @@
-import React from 'react'
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-
-export const Busqueda = () => {
-  return (
-    <div class="container">
-      <h5 class="card-title mb-2">Escribe el nombre a buscar:</h5>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search"></input>
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-    </div>
-  )
-}
+import React, { useState, useEffect } from 'react';
+//mport { listaproductos } from './data-producto';
+import Swal from 'sweetalert2';
+import { listarestaurante } from './produService';
 
 
 
+const Busqueda = () => {
+  const [valoresFormulario, setValoresFormulario] = useState({});
+  const { nombre = '', descripcion = '', direccion = '', imagen = '' } = valoresFormulario;
+  const [resultado, setResultado, getresultado] = useState([]);
 
-export default function New() {
-  const [nombre, setnombre] = useState("");
-  const [descripcion, setdescripcion] = useState("");
-  const [direccion, setdireccion] = useState("");
-  const [imagen, setimagen] = useState("");
-  const [data, setData] = useState([]);
-
-
-  const nombreOnchangeHandler = (evento) => {
-    setnombre(evento.target.value);
-  };
-  const descripcionOnchangeHandler = (evento) => {
-    setdescripcion(evento.target.value);
-  };
-
-  const direccionOnchangeHandler = (evento) => {
-    setdireccion(evento.target.value);
-  };
-
-  const imagenOnchangeHandler = (evento) => {
-    setimagen(evento.target.value);
-  };
+  useEffect(() => {
+    getresultado();
+  }, []);
 
 
+  const handleOnChange = (e) => {
 
-  const buttonOnsubmitHandler = (evento) => {
-    evento.preventDefault();
-    console.log("enviando...");
+    console.log(e.target.name, e.target.value);
 
-    const datosNuevos = {
-      id: uuidv4(),
-      nombre: nombre,
-      descripcion: descripcion,
-      direccion: direccion,
-      imagen: imagen
-    };
-
-    setnombre("");
-    setdescripcion("");
-    setdireccion("");
-    setimagen("");
-
-    const newData = [...data, datosNuevos];
-    setData(newData);
-    console.log(newData);
-
-    localStorage.setItem("key", JSON.stringify(newData));
-  };
-
-  return (
-
-    <div className="new">
-
-      <form onSubmit={buttonOnsubmitHandler}>
-        <label htmlFor="formGroupExampleInput" className="form-label"><h3>Nombre del Restaurante</h3></label>
-        <input
-          type="text"
-          placeholder="Nombre del Restaurante"
-          name="text"
-          value={nombre}
-          onChange={nombreOnchangeHandler}
-          className="form-control"
-          id="formGroupExampleInput"
-          autoComplete="off"
-          required
-        />
-        <label htmlFor="formGroupExampleInput" className="form-label"><h3>Tipo de comida</h3></label>
-        <input
-          type="text"
-          placeholder="Tipo de comida"
-          name="text"
-          value={descripcion}
-          onChange={descripcionOnchangeHandler}
-          className="form-control"
-          id="formGroupExampleInput"
-          autoComplete="off"
-          required
-        />
+    if (e.target.name === 'nombre') {
+      setValoresFormulario({ ...valoresFormulario, nombre: e.target.value });
+    } else if (e.target.name === 'descripcion') {
+      setValoresFormulario({ ...valoresFormulario, descripcion: e.target.value });
+    } else if (e.target.name === 'direccion') {
+      setValoresFormulario({ ...valoresFormulario, direccion: e.target.value });
+    } else if (e.target.name === 'imagen') {
+      setValoresFormulario({ ...valoresFormulario, imagen: e.target.value });
+      console.log(valoresFormulario);
+    }
 
 
-        <label htmlFor="formGroupExampleInput" className="form-label"><h3>Donde esta ubicado</h3></label>
-        <input
-          type="text"
-          placeholder="En donde esta ubicado el Restaurante"
-          name="text"
-          value={direccion}
-          onChange={direccionOnchangeHandler}
-          className="form-control"
-          id="formGroupExampleInput"
-          autoComplete="off"
-          required
-        />
+    const handleOnSubmit = (e) => {
+      e.preventDefault();
+      console.log('estoy haciendo click');
+      const filtro =getresultado(nombre.toUpperCase().includes(nombre.toUpperCase())) //listaproductos.filter(hshshs => hshshs.nombre.toUpperCase().includes(nombre.toUpperCase()));
 
-        <label htmlFor="formGroupExampleInput" className="form-label"><h3>Link de la imagen del Restaurante</h3></label>
-        <input
-          type="text"
-          placeholder="enlace de la imagen"
-          name="text"
-          value={imagen}
-          onChange={imagenOnchangeHandler}
-          className="form-control"
-          id="formGroupExampleInput"
-          autoComplete="off"
-          required
-        />
 
-        <div className="col-sm-20">
-          <button className="btn btn-primary">Añadir</button>
+      const getresultado = async () => {
+        try {
+          Swal.fire({ allowOutsideClick: false, text: 'Cargando...' });
+          Swal.showLoading();
+          const resultadoFirebase = await listarestaurante();
+          setResultado(resultadoFirebase);
+          Swal.close();
+        } catch (error) {
+          Swal.close();
+          console.log(error);
+        }
+      }
+
+      console.log(resultado);
+      setResultado(filtro);
+    }
+
+    return (
+      <div className="container-fluid mt-3">
+        <div className='row'>
+          <div className='col'>
+            <form onSubmit={(e) => handleOnSubmit(e)}>
+              <div className="mb-3">
+                <label className="form-label">Nombre restaurante</label>
+                <input required type="text" name="nombre" value={nombre}
+                  className="form-control" onChange={(e) => { handleOnChange(e) }} />
+              </div>
+              {/*<div className="mb-3">
+                    <label className="form-label">descripcion</label>
+                    <input required type="text" name="descripcion" value={descripcion}
+                        className="form-control" onChange={(e) => { handleOnChange(e) }} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">direccion</label>
+                    <input required type="text" name="direccion" value={direccion}
+                        className="form-control" onChange={(e) => { handleOnChange(e) }} />
+                </div>*/}
+              <button type="submit" className="btn btn-primary">Buscar</button>
+            </form>
+          </div>
         </div>
+        <div className='row mt-3'>
+          <div className='col'>
+            <div className="row row-cols-1 row-cols-md-4 g-4">
+              {
+                resultado.map(asasas => {
+                  return (
+                    <div className="col" key={asasas.id}>
+                      <div className="card">
+                        <img src={asasas.imagen} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                          <h5 className="card-title">{asasas.nombre}</h5>
+                          <p className="card-text">{asasas.descripcion}</p>
+                          <p className="card-text">{asasas.direccion}</p>
 
-      </form>
-
-    </div>
-  );
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
+export {
+  Busqueda
+}
+

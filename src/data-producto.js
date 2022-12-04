@@ -1,6 +1,6 @@
 const listaproductos = [
     {
-    id:1,
+    id: 1,
     nombre:"Romero Cocina Artesanal",
     descripcion:"Nuestros platos: antipastos, pizzas, ensaladas, cacerolas,sopas, risottos, pastas, postres y cocteles.",
     direccion:"Cra.12 #123-45, Cl.123 #12a 12 Edificio Libertad",
@@ -8,7 +8,7 @@ const listaproductos = [
 
 },
 {
-    id:2,
+    id: 2,
     nombre:"A Puro Fuego",
     descripcion:"Una parrilla tradicional Argentina",
     direccion:"Calle 8 # 42 54 <br> Medellín - Colombia",
@@ -16,7 +16,7 @@ const listaproductos = [
 
 },
 {
-    id:3,
+    id: 3,
     nombre:"Amsu Sushi",
     descripcion:"Japonesa, Peruana, Sushi, Sudamericana, Helados y dulces japoneses,Fusión japonesa",
     direccion:" Cra. 38 # 18 - 101,  Local 162, Medellín, Antioquia",
@@ -24,7 +24,7 @@ const listaproductos = [
 
 },
 {
-    id:4,
+    id: 4,
     nombre:"Asados Doña Rosa",
     descripcion:"Desc:comida típica antioqueña, pura tradición paisa",
     direccion:"Car43 A No. 27 - 205,<br> local 3458, Medellín",
@@ -32,7 +32,7 @@ const listaproductos = [
 
 },
 {
-    id:5,
+    id: 5,
     nombre:"Al Patio",
     descripcion:"Si usted desea evocar la naturaleza, Al Patio es el lugar perfecto para sentarse bajo el laurel a pasar la tarde o en la terraza con vista a la ciudad",
     direccion:"Car38 No.19 -265 <br> Vía las Palmas Medellín",
@@ -40,7 +40,7 @@ const listaproductos = [
 
 },
 {
-    id:6,
+    id: 6,
     nombre:"Ammazza Gin Garden<",
     descripcion:"La visión con el ambiente que les ofrecemos, el olfato con las aromas de nuestros gin & tonic’s y los platos de nuestra carta",
     direccion:"Cra.34 #7 - 40<br> Cra.76 #73 B-39, Piso 1 Laureles",
@@ -48,7 +48,7 @@ const listaproductos = [
 
 },
 {
-    id:7,
+    id: 7,
     nombre:"Ammazza Gin Garden",
     descripcion:"Desc:La visión con el ambiente que les ofrecemos, el olfato con las aromas de nuestros gin & tonic’s y los platos de nuestra carta, el oído con la música que es expresión de las tendencias contemporáneas",
     direccion:"Cra.12 #123-45, Cl.123 #12a 12 Edificio Libertad",
@@ -56,7 +56,7 @@ const listaproductos = [
 
 },
 {
-    id:8,
+    id: 8,
     nombre:"B&V Bar & Grill",
     descripcion:":La música y los amigos, el escenario perfecto para crear historias inlvidables.",
     direccion:"Cl10b #35-8, Medellín",
