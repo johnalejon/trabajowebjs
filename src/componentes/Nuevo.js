@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { crearrestaurante } from './produService';
+//
 import Swal from 'sweetalert2';
+import { crearrestaurante } from '../produService';
 
 
 export const Nuevo = () => {

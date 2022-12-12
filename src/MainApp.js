@@ -1,9 +1,12 @@
 import React from 'react'
-import { Navbar } from './Navbar'
+import { Navbar } from './ux/Navbar';
 import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom'
-import { Inicio } from './Inicio'
-import { Nuevo } from './Nuevo'
-import { Busqueda } from './Busqueda'
+import { Inicio } from './componentes/Inicio';
+import { Nuevo } from './componentes/Nuevo';
+import { Busqueda } from './componentes/Busqueda';
+
+
+
 
 
 const MainApp = () => {

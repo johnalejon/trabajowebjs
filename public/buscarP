@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 //mport { listaproductos } from './data-producto';
 import Swal from 'sweetalert2';
 import { listarestaurante } from './produService';
@@ -8,10 +8,12 @@ import { listarestaurante } from './produService';
 const Busqueda = () => {
   const [valoresFormulario, setValoresFormulario] = useState({});
   const { nombre = '', descripcion = '', direccion = '', imagen = '' } = valoresFormulario;
-  const [resultado, setResultado, getresultado] = useState([]);
+  const [resultado, setResultado] = useState([]);
+  const [restaurante, setrestaurante] = useState([]);
 
   useEffect(() => {
-    getresultado();
+    //getresultado();
+    getrestaurante();
   }, []);
 
 
@@ -34,10 +36,22 @@ const Busqueda = () => {
     const handleOnSubmit = (e) => {
       e.preventDefault();
       console.log('estoy haciendo click');
-      const filtro =getresultado(nombre.toUpperCase().includes(nombre.toUpperCase())) //listaproductos.filter(hshshs => hshshs.nombre.toUpperCase().includes(nombre.toUpperCase()));
+      const filtro = getrestaurante(nombre.toUpperCase().includes(nombre.toUpperCase())) //listaproductos.filter(hshshs => hshshs.nombre.toUpperCase().includes(nombre.toUpperCase()));
 
+      const getrestaurante = async () => {
+        try {
+          Swal.fire({ allowOutsideClick: false, text: 'Cargando...' });
+          Swal.showLoading();
+          const restauranteFirebase = await listarestaurante();
+          setrestaurante(restauranteFirebase);
+          Swal.close();
+        } catch (error) {
+          Swal.close();
+          console.log(error);
+        }
+      }
 
-      const getresultado = async () => {
+      /*const getresultado = async () => {
         try {
           Swal.fire({ allowOutsideClick: false, text: 'Cargando...' });
           Swal.showLoading();
@@ -48,11 +62,13 @@ const Busqueda = () => {
           Swal.close();
           console.log(error);
         }
-      }
+      }*/
 
-      console.log(resultado);
+     /* console.log(restaurante);
       setResultado(filtro);
     }
+
+
 
     return (
       <div className="container-fluid mt-3">
@@ -74,7 +90,7 @@ const Busqueda = () => {
                     <input required type="text" name="direccion" value={direccion}
                         className="form-control" onChange={(e) => { handleOnChange(e) }} />
                 </div>*/}
-              <button type="submit" className="btn btn-primary">Buscar</button>
+            /*  <button type="submit" className="btn btn-primary">Buscar</button>
             </form>
           </div>
         </div>
@@ -107,5 +123,5 @@ const Busqueda = () => {
 }
 export {
   Busqueda
-}
+}*/
 

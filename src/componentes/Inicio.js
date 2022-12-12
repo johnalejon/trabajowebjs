@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 //import { listaproductos } from './data-producto'
 import Swal from 'sweetalert2';
-import { listarestaurante } from './produService';
+import { listarestaurante } from '../produService';
 
 export const Inicio = () => {
 
